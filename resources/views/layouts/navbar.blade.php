@@ -9,16 +9,32 @@
         <span class="dot">•</span>
         <a href="#">Collections</a>
         <span class="dot">•</span>
-        <a href="#">Shop</a>
+        <a href="{{route('home')}}">home</a>    
         <span class="dot">•</span>
         <a href="#">Contact</a>
     </nav>
 
-    <div class="icons">
-        <a href="#"><i class="fa fa-search"></i></a>
-        <a href="#"><i class="fa fa-heart"></i></a>
-        <a href="#"><i class="fa fa-shopping-bag"></i></a>
-    </div>
+   <div class="icons">
+    <!-- Tombol Search -->
+    <a href="javascript:void(0);" id="search-toggle"><i class="fa fa-search"></i></a>
+
+    <!-- Form Pencarian -->
+    <form id="search-form" action="{{ route('produk.search') }}" method="GET" style="display:none;">
+        <input type="text" name="q" placeholder="Search..." class="search-input">
+    </form>
+
+    <!-- Ikon lain -->
+    <a href="#"><i class="fa fa-heart"></i></a>
+    <a href="#"><i class="fa fa-shopping-bag"></i></a>
+
+    <a href="{{ route('logout') }}" title="Logout">
+    <i class="fa fa-sign-out-alt"></i>
+</a>
+
+</div>
+
+
+
 </header>
 
 <style>
@@ -89,7 +105,39 @@
 .icons a:hover {
     color: #e6cfcf;
 }
+
+.search-input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    width: 150px;
+    transition: 0.3s ease;
+}
+
+#search-form {
+    display: inline-block;
+}
+
+#search-form.show {
+    display: inline-block !important;
+}
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchToggle = document.getElementById('search-toggle');
+    const searchForm = document.getElementById('search-form');
+
+    searchToggle.addEventListener('click', () => {
+        if (searchForm.style.display === 'none' || searchForm.style.display === '') {
+            searchForm.style.display = 'inline-block';
+        } else {
+            searchForm.style.display = 'none';
+        }
+    });
+});
+</script>
 
 <!-- Font Awesome (ikon search, love, bag) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

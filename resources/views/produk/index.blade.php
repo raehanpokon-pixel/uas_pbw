@@ -193,53 +193,82 @@
 
 
     <main>
-        <div class="category-bar">
-            @foreach($kategoris as $k)
-                <a href="{{ route('produk.byKategori', $k->id) }}" 
-                   class="{{ isset($kategori) && $kategori->id == $k->id ? 'active' : '' }}">
-                    {{ $k->nama_kategori }}
-                </a>
-            @endforeach
-        </div>
+      <div class="category-bar" style="gap: 10px; justify-content: flex-start; padding-left: 40px;">
+            <!-- Dropdown Gender -->
+                        <!-- Dropdown Gender -->
+            <select onchange="window.location.href=this.value"
+                style="
+                    padding: 8px 20px;
+                    border: 2px solid #5c2222;
+                    border-radius: 20px;
+                    background-color: #ffffff;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 14px;
+                    color: #5c2222;
+                    cursor: pointer;
+                    outline: none;
+                ">
+                <option value="{{ route('produk.index') }}" {{ !isset($gender) ? 'selected' : '' }}>
+                    Semua Gender
+                </option>
 
-        <div class="container">
-            @if(session('success'))
-                <div class="alert">{{ session('success') }}</div>
-            @endif
+                <option value="{{ route('produk.gender', 'men') }}" {{ (isset($gender) && $gender == 'men') ? 'selected' : '' }}>
+                    Men
+                </option>
 
-            <h1>{{ isset($kategori) ? $kategori->nama_kategori : 'Semua Produk' }}</h1>
+                <option value="{{ route('produk.gender', 'women') }}" {{ (isset($gender) && $gender == 'women') ? 'selected' : '' }}>
+                    Women
+                </option>
+            </select>
 
-            <div class="grid">
-               @forelse($produks as $p)
-<div class="card">
-    @if($p->foto)
-        <img src="{{ asset('storage/' . $p->foto) }}" alt="{{ $p->nama_produk }}">
-    @else
-        <img src="https://via.placeholder.com/250x180?text=No+Image" alt="No Image">
-    @endif
+            <!-- === KATEGORI FILTER SESUAI GENDER === -->
+                @foreach($kategoris as $k)
 
-    <h3>{{ $p->nama_produk }}</h3>
+                    @php
+                        // Jika gender dipilih → kategori harus sesuai gender
+                        if (isset($gender)) {
+                            if ($k->gender !== $gender) continue;
+                        }
 
-    <!-- Rating -->
-    <div class="rating">
-        ★★★★☆
-    </div>
+                        // Cek minimal ada 1 produk dalam kategori ini
+                        $adaProdukUntukGender = $k->produk()->exists();
+                    @endphp
 
-    <!-- Harga + tombol buy -->
-    <div class="price-row">
-        <span class="price">Rp {{ number_format(rand(1000000, 4000000), 0, ',', '.') }}</span>
-        <button class="buy-btn">Buy</button>
-    </div>
+                    @if($adaProdukUntukGender)
+                        <a href="{{ route('produk.byKategori', $k->id) }}{{ isset($gender) ? '?gender='.$gender : '' }}"
+                        class="{{ isset($kategori) && $kategori->id == $k->id ? 'active' : '' }}">
+                            {{ $k->nama_kategori }}
+                        </a>
+                    @endif
 
-    <!-- Wishlist -->
-    <span class="wishlist">♡</span>
-</div>
-@empty
-    <p style="text-align:center; color:#5c2222;">Belum ada produk di kategori ini.</p>
-@endforelse
-
+                @endforeach
             </div>
         </div>
+        <div class="container">
+
+        <div class="grid">
+            @forelse($produks as $p)
+                <div class="card">
+
+                    <!-- FOTO -->
+                    <img src="{{ asset('storage/'.$p->foto) }}" alt="{{ $p->nama_produk }}">
+
+                    <!-- NAMA -->
+                    <h3>{{ $p->nama_produk }}</h3>
+
+                    <!-- GENDER -->
+                    <span style="font-size:12px; color:#5c2222;">
+                        {{ ucfirst($p->gender) }}
+                    </span>
+
+                </div>
+            @empty
+                <p style="color:#5c2222; text-align:center;">Tidak ada produk ditemukan.</p>
+            @endforelse
+        </div>
+
+</div>
+
     </main>
 
     <footer>

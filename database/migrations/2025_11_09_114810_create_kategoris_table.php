@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kategori'); // contoh: Sneakers, Flatsus, dll
+            $table->enum('gender', ['men', 'women'])->default('men');
             $table->timestamps();
         });
     }

@@ -1,117 +1,131 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Produk</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Produk</title>
 
-<style>
-body {
-    font-family: "Poppins", sans-serif;
-    background-color: #efdbc9;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-.form-wrapper {
-    background: #fff;
-    width: 450px;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-}
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #efdbc9;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
 
-.form-wrapper h2 {
-    text-align: center;
-    color: #4a1f1f;
-    margin-bottom: 20px;
-}
+        .form-wrapper {
+            background: #fff;
+            width: 450px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
 
-label {
-    font-weight: 600;
-    color: #4a1f1f;
-    margin-bottom: 5px;
-    display: block;
-}
+        .form-wrapper h2 {
+            text-align: center;
+            color: #4a1f1f;
+            margin-bottom: 25px;
+            font-size: 26px;
+            letter-spacing: .5px;
+        }
 
-input[type="text"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #d9b597;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    outline: none;
-    transition: 0.3s;
-}
+        label {
+            font-weight: 600;
+            color: #4a1f1f;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 14px;
+        }
 
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #5c2222;
-}
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 2px solid #d9b597;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            outline: none;
+            transition: 0.3s;
+            font-size: 14px;
+            background: #fff7f0;
+        }
 
-textarea {
-    resize: none;
-    height: 90px;
-}
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #5c2222;
+        }
 
-/* Upload */
-.upload-area {
-    border: 2px dashed #d9b597;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    margin-bottom: 15px;
-    color: #6c4a4a;
-}
+        textarea {
+            resize: none;
+            height: 90px;
+        }
 
-.upload-area:hover {
-    border-color: #5c2222;
-}
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #d9b597;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+            color: #6c4a4a;
+            background: #fff7f0;
+            transition: .3s;
+        }
 
-.img-preview {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-    display: none;
-}
+        .upload-area:hover {
+            border-color: #5c2222;
+            background: #ffeede;
+        }
 
-/* Button Style */
-.btn-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
+        .img-preview {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+            border: 2px solid #d9b597;
+        }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    color: white;
-    transition: 0.3s;
-}
+        /* Buttons */
+        .btn-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
 
-.btn-save {
-    background-color: #5c2222;
-}
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+            font-size: 14px;
+        }
 
-.btn-save:hover {
-    opacity: 0.85;
-}
+        .btn-save {
+            background-color: #5c2222;
+        }
 
-.btn-cancel {
-    background-color: #777;
-}
+        .btn-save:hover {
+            opacity: 0.85;
+        }
 
-.btn-cancel:hover {
-    opacity: 0.85;
-}
-</style>
+        .btn-cancel {
+            background-color: #777;
+        }
+
+        .btn-cancel:hover {
+            opacity: 0.85;
+        }
+    </style>
 
 </head>
 <body>
@@ -126,6 +140,12 @@ button {
         <label>Nama Produk</label>
         <input type="text" name="nama_produk" placeholder="Masukkan nama produk" required>
 
+        <label>Pilih Gender</label>
+        <select name="gender" required>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+        </select>
+
         <label>Kategori</label>
         <select name="kategori_id" required>
             @foreach($kategoris as $k)
@@ -133,11 +153,11 @@ button {
             @endforeach
         </select>
 
-    
         <label>Foto Produk</label>
         <div class="upload-area" onclick="document.getElementById('file').click()">
             Klik untuk upload foto
         </div>
+
         <input id="file" type="file" name="foto" accept="image/*" hidden onchange="previewImage(event)">
         <img id="preview" class="img-preview">
 
@@ -145,6 +165,7 @@ button {
             <button type="button" class="btn-cancel" onclick="history.back()">Cancel</button>
             <button type="submit" class="btn-save">Simpan</button>
         </div>
+
     </form>
 </div>
 

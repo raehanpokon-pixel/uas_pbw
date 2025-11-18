@@ -1,15 +1,15 @@
 <header class="navbar">
     <div class="logo">
         <span class="brand">ShoeStore</span>
-        <img src="{{ asset('gambar-home/logo.jpg.png') }}" alt="Logo" class="logo-icon">
+        <img src="<?php echo e(asset('gambar-home/logo.jpg.png')); ?>" alt="Logo" class="logo-icon">
     </div>
 
     <nav class="menu">
-        <a href="{{route('about')}}">About</a>
+        <a href="<?php echo e(route('about')); ?>">About</a>
         <span class="dot">•</span>
         <a href="#">Collections</a>
         <span class="dot">•</span>
-        <a href="{{route('home')}}">home</a>    
+        <a href="<?php echo e(route('home')); ?>">home</a>    
         <span class="dot">•</span>
         <a href="#">Contact</a>
     </nav>
@@ -19,7 +19,7 @@
     <a href="javascript:void(0);" id="search-toggle"><i class="fa fa-search"></i></a>
 
     <!-- Form Pencarian -->
-    <form id="search-form" action="{{ route('produk.search') }}" method="GET" style="display:none;">
+    <form id="search-form" action="<?php echo e(route('produk.search')); ?>" method="GET" style="display:none;">
         <input type="text" name="q" placeholder="Search..." class="search-input">
     </form>
 
@@ -27,7 +27,7 @@
     <a href="#"><i class="fa fa-heart"></i></a>
     <a href="#"><i class="fa fa-shopping-bag"></i></a>
 
-    <a href="{{ route('logout') }}" title="Logout">
+    <a href="<?php echo e(route('logout')); ?>" title="Logout">
     <i class="fa fa-sign-out-alt"></i>
 </a>
 
@@ -141,3 +141,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Font Awesome (ikon search, love, bag) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<?php /**PATH D:\uaspbw\resources\views/layouts/navbar.blade.php ENDPATH**/ ?>

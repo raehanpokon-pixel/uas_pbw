@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View; // Pastikan View di-import
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -15,8 +16,8 @@ class HomeController extends Controller
     {
         // 1. Data untuk Hero Section (Gambar paling atas)
         $heroData = [
-            // Saya gunakan 'image1.jpg' dari screenshot Anda sebagai contoh
-            'image_url' => 'https://images.unsplash.com/photo-1606813902770-ad8309826d33',
+            // GANTI 'banner.jpg' dengan nama file Anda di 'public/gambar-home/'
+            'image_url' => asset('gambar-home/banner.jpg.jpg'), 
             'alt_text' => 'New Brown Collection',
             'title' => 'New Brown Collection',
             'discount' => '30% OFF',
@@ -26,49 +27,49 @@ class HomeController extends Controller
 
         // 2. Data untuk Grid Promosi 1
         $promoGrid1Data = [
-            // PASTIKAN NAMA FILE INI (misal: 'promo-boots.jpg') ADA DI DALAM FOLDER 'public/home/' ANDA
-            'boots' => ['image_url' => asset('home/promo-boots.jpg')],
-            'arrived' => ['image_url' => asset('home/promo-arrived.jpg')], // Ini sudah benar menurut terminal Anda
-            'coupon1' => ['image_url' => asset('home/promo-coupon1.jpg')], // Ini sudah benar
-            'coupon2' => ['image_url' => asset('home/promo-coupon2.jpg')], // Ini sudah benar
-            'sale' => ['image_url' => asset('home/promo-sale.jpg')],     // Ini sudah benar
-            'style' => ['image_url' => asset('home/promo-style.jpg')],
+            // PASTIKAN NAMA FILE INI ADA DI FOLDER 'public/gambar-home/'
+            'boots' => ['image_url' => asset('gambar-home/boot.jpg')],
+            'arrived' => ['image_url' => asset('gambar-home/arived.jpg.png')],
+            'coupon1' => ['image_url' => asset('gambar-home/cupon 1.jpg.png')],
+            'coupon2' => ['image_url' => asset('gambar-home/cupon 2.jpg.png')],
+            'sale' => ['image_url' => asset('gambar-home/sale.jpg')],
+            'style' => ['image_url' => asset('gambar-home/style.jpg.png')],
         ];
         
         // 3. Data untuk Grid Promosi 2
         $promoGrid2Data = [
             'heels' => [
-                // PASTIKAN NAMA FILE INI ADA DI 'public/home/'
-                'image_url' => asset('home/promo-heels.jpg'),
+                // PASTIKAN NAMA FILE INI ADA DI 'public/gambar-home/'
+                'image_url' => asset('gambar-home/heels.jpg.png'),
                 'title' => 'Step into your fairytale',
                 'subtitle' => 'Every step is a whisper of elegance',
             ],
-            // PASTIKAN NAMA FILE INI ADA DI 'public/home/'
-            'flats' => ['image_url' => asset('home/promo-flats.jpg')],
-            'white_heels' => ['image_url' => asset('home/promo-white-heels.jpg')],
-            'dunk' => ['image_url' => asset('home/promo-dunk-poster.jpg')],
+            // PASTIKAN NAMA FILE INI ADA DI 'public/gambar-home/'
+            'flats' => ['image_url' => asset('gambar-home/flats.jpg.png')],
+            'white_heels' => ['image_url' => asset('gambar-home/white heels.jpg.png')],
+            'dunk' => ['image_url' => asset('gambar-home/dunk poster.jpg.png')],
         ];
 
         // 4. Data untuk Best Seller (Perbaikan Penting)
-        // Sekarang memuat gambar dari 'public/storage/produk/'
+        // Memuat gambar dari 'storage/app/public/produk/'
         $bestSellerData = [
             (object)[
                 'name' => 'Air Jordan 1',
-                // Saya ambil nama file 'GkbW...' dari screenshot folder 'produk' Anda sebagai contoh
+                // GANTI NAMA FILE INI DENGAN NAMA FILE DI 'storage/app/public/produk/'
                 'image_url' => asset('storage/produk/GkbWjZfK4Sj3qDSpWvRwVudADrWcZj.png'), 
                 'rating' => 5,
                 'price' => 3800000,
             ],
             (object)[
                 'name' => 'Air Force 1',
-                // Saya ambil nama file 'JTwY...' dari screenshot folder 'produk' Anda sebagai contoh
+                // GANTI NAMA FILE INI DENGAN NAMA FILE DI 'storage/app/public/produk/'
                 'image_url' => asset('storage/produk/JTwYMzxF7cYbU37nvKqj7qWwD1qYhL.jpg'), 
                 'rating' => 5,
                 'price' => 3500000,
             ],
             (object)[
                 'name' => 'Dunk',
-                // Saya ambil nama file 'LswX...' dari screenshot folder 'produk' Anda sebagai contoh
+                // GANTI NAMA FILE INI DENGAN NAMA FILE DI 'storage/app/public/produk/'
                 'image_url' => asset('storage/produk/LswXqf5jm8WnC5WnFMTwGuZoUhWcVGlsc.png'), 
                 'rating' => 4,
                 'price' => 2900000,

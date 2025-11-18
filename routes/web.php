@@ -44,3 +44,7 @@ Route::get('/about', function () {
 Route::get('/register', function () {
     return 'Halaman register belum dibuat';
 })->name('register');
+
+Route::get('/tes', function () {
+    return 'Halo Bbi, ini rute tes! Server sudah membaca file baru.';
+});

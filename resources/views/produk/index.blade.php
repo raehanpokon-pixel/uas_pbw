@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShoeStore</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* --- RESET DAN DASAR --- */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* RESET */
+        html, body { height: 100%; margin: 0; padding: 0; }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #d9b597;
@@ -20,45 +17,16 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        main { flex: 1; }
 
-        main {
-            flex: 1; /* isi utama akan mengisi ruang kosong di atas footer */
-        }
-
-        /* --- HEADER --- */
-        header {
-            background-color: #5c2222;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- KATEGORI --- */
+        /* CATEGORY */
         .category-bar {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            justify-content: flex-start;
+            gap: 10px;
             background-color: #f5e3d2;
-            padding: 10px 0;
+            padding: 10px 40px;
+            align-items: center;
         }
 
         .category-bar a {
@@ -67,212 +35,242 @@
             padding: 8px 20px;
             border: 2px solid #5c2222;
             border-radius: 20px;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-
         .category-bar a.active,
         .category-bar a:hover {
             background-color: #5c2222;
             color: white;
         }
 
-        /* --- KONTEN --- */
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 20px;
+        /* ⭐ TRIPLE LINE FINAL ⭐ */
+        .page-title-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 40px 10px 40px;
         }
 
-        h1 {
-            text-align: center;
-            color: #5c2222;
-            margin-bottom: 30px;
+        .page-title-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 15px;
+            background-color: #d9b597;
+            padding: 0 12px;
+            color: #4a3f35;
+            z-index: 3;
+        }
+
+        .triple-line {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #3a2f2a;
+            position: relative;
+        }
+
+        .triple-line::before,
+        .triple-line::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0;
+            height: 1px;
+            background-color: #6b5045;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .triple-line::before { top: -6px; }
+        .triple-line::after { bottom: -6px; }
+
+        /* CARD */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto; 
+            padding: 0 15px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 20px;
         }
 
         .card {
-            background-color: #f8ebe1;
+            background-color: #e6d2be;
+            padding: 20px;
             border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s;
+            position: relative;
         }
 
-        .card:hover {
-            transform: scale(1.03);
+        .product-image-box {
+            background: linear-gradient(to bottom, #f9ceb3, #f7e9dd);
+            padding: 12px;
+            border-radius: 12px;
+            min-height: 220px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative; 
+            overflow: hidden;
         }
 
-        .card img {
+        .product-image {
+            width: 95%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 30px; 
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #4a3f35;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
+            background-color: white; 
+            padding: 10px 0;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
         }
 
-        .card h3 {
-            color: #4a1f1f;
-            margin: 10px 0 5px;
-            font-size: 1.1rem;
+        .product-rating {
+            color: #f4c430;
+            font-size: 18px;
+            margin: 15px 0 8px 0; 
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .heart {
+            font-size: 28px;
+            color: white;
+            -webkit-text-stroke: 2px #00000040;
         }
 
         .price {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #3b1a1a;
         }
 
-        /* --- ALERT --- */
-        .alert {
-            background-color: #c9e6c9;
-            color: #2b4b2b;
-            text-align: center;
-            padding: 10px;
+        .buy-btn {
+            background-color: #4a89f3;
+            color: white;
+            padding: 4px 12px;
             border-radius: 8px;
-            margin-bottom: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            text-decoration: none;
+        }
+        .buy-btn:hover {
+            background-color: #3570d6;
         }
 
-        /* --- FOOTER --- */
         footer {
             background-color: #5c2222;
             color: white;
             text-align: center;
             padding: 20px;
-            margin-top: auto; /* menjaga agar selalu di bawah */
+            margin-top: auto;
         }
-
-        .card {
-    position: relative;
-}
-
-/* Rating */
-.rating {
-    color: #e8b100;
-    font-size: 18px;
-    margin: 6px 0;
-}
-
-/* Harga dan tombol buy */
-.price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Tombol Buy */
-.buy-btn {
-    background-color: #5c8ef2;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 12px;
-    color: white;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-/* Heart wishlist */
-.wishlist {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    font-size: 20px;
-    color: #b14f4f;
-    cursor: pointer;
-    user-select: none;
-}
-
     </style>
 </head>
+
 <body>
 
-    @include('layouts.navbar')
+@include('layouts.navbar')
 
+<main>
+    <div class="category-bar">
+        <select onchange="window.location.href=this.value"
+            style="padding: 8px 20px; border: 2px solid #5c2222; border-radius: 20px; background-color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 14px; color: #5c2222; cursor: pointer; outline: none;">
+            <option value="{{ route('produk.index') }}" {{ !isset($gender) ? 'selected' : '' }}>Semua Gender</option>
+            <option value="{{ route('produk.gender', 'men') }}" {{ (isset($gender) && $gender == 'men') ? 'selected' : '' }}>Men</option>
+            <option value="{{ route('produk.gender', 'women') }}" {{ (isset($gender) && $gender == 'women') ? 'selected' : '' }}>Women</option>
+        </select>
 
-    <main>
-      <div class="category-bar" style="gap: 10px; justify-content: flex-start; padding-left: 40px;">
-            <!-- Dropdown Gender -->
-                        <!-- Dropdown Gender -->
-            <select onchange="window.location.href=this.value"
-                style="
-                    padding: 8px 20px;
-                    border: 2px solid #5c2222;
-                    border-radius: 20px;
-                    background-color: #ffffff;
-                    font-family: 'Poppins', sans-serif;
-                    font-size: 14px;
-                    color: #5c2222;
-                    cursor: pointer;
-                    outline: none;
-                ">
-                <option value="{{ route('produk.index') }}" {{ !isset($gender) ? 'selected' : '' }}>
-                    Semua Gender
-                </option>
+        @foreach($kategoris as $k)
+            @php
+                if (isset($gender) && $k->gender !== $gender) continue;
+                $adaProduk = $k->produk()->exists();
+            @endphp
 
-                <option value="{{ route('produk.gender', 'men') }}" {{ (isset($gender) && $gender == 'men') ? 'selected' : '' }}>
-                    Men
-                </option>
+            @if($adaProduk)
+                <a href="{{ route('produk.byKategori', $k->id) }}{{ isset($gender) ? '?gender='.$gender : '' }}"
+                    class="{{ isset($kategori) && $kategori->id == $k->id ? 'active' : '' }}">
+                    {{ $k->nama_kategori }}
+                </a>
+            @endif
+        @endforeach
+    </div>
 
-                <option value="{{ route('produk.gender', 'women') }}" {{ (isset($gender) && $gender == 'women') ? 'selected' : '' }}>
-                    Women
-                </option>
-            </select>
+    <!-- 🔥 TRIPLE LINE TITLE FINAL -->
+    <div class="page-title-section">
+        <div class="triple-line"></div>
 
-            <!-- === KATEGORI FILTER SESUAI GENDER === -->
-                @foreach($kategoris as $k)
+        <h2>
+            @if(isset($kategori))
+                {{ $kategori->nama_kategori }}
+            @elseif(isset($gender))
+                {{ ucfirst($gender) }}'s Products
+            @else
+                Semua Produk
+            @endif
+        </h2>
 
-                    @php
-                        // Jika gender dipilih → kategori harus sesuai gender
-                        if (isset($gender)) {
-                            if ($k->gender !== $gender) continue;
-                        }
+        <div class="triple-line"></div>
+    </div>
 
-                        // Cek minimal ada 1 produk dalam kategori ini
-                        $adaProdukUntukGender = $k->produk()->exists();
-                    @endphp
-
-                    @if($adaProdukUntukGender)
-                        <a href="{{ route('produk.byKategori', $k->id) }}{{ isset($gender) ? '?gender='.$gender : '' }}"
-                        class="{{ isset($kategori) && $kategori->id == $k->id ? 'active' : '' }}">
-                            {{ $k->nama_kategori }}
-                        </a>
-                    @endif
-
-                @endforeach
-            </div>
-        </div>
-        <div class="container">
-
+    <div class="container">
         <div class="grid">
             @forelse($produks as $p)
-                <div class="card">
+            <div class="card">
 
-                    <!-- FOTO -->
-                    <img src="{{ asset('storage/'.$p->foto) }}" alt="{{ $p->nama_produk }}">
+                <div class="product-image-box">
+                    <img src="{{ asset('storage/' . $p->foto) }}"
+                        class="product-image"
+                        alt="{{ $p->nama_produk }}">
+                    
+                    <div class="product-name">
+                        <b>{{ $p->nama_produk }}</b>
+                    </div>
+                </div>
 
-                    <!-- NAMA -->
-                    <h3>{{ $p->nama_produk }}</h3>
+                <div class="product-rating">★★★★★</div>
 
-                    <!-- GENDER -->
-                    <span style="font-size:12px; color:#5c2222;">
-                        {{ ucfirst($p->gender) }}
+                <div class="product-footer">
+                    <span class="heart">♡</span>
+
+                    <span class="price">
+                        Rp {{ number_format($p  ->harga, 0, ',', '.') }}
                     </span>
 
+                    <a href="#" class="buy-btn">Buy</a>
                 </div>
+            </div>
+
             @empty
-                <p style="color:#5c2222; text-align:center;">Tidak ada produk ditemukan.</p>
+                <p>Tidak ada produk tersedia.</p>
             @endforelse
+
         </div>
+    </div>
+</main>
 
-</div>
+<footer>
+    © 2025 ShoeStore. All rights reserved.
+</footer>
 
-    </main>
-
-    <footer>
-        <p>© 2025 ShoeStore — Koleksi Sepatu Premium Indonesia</p>
-    </footer>
 </body>
 </html>

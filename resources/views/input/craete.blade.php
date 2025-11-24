@@ -158,6 +158,11 @@
             Klik untuk upload foto
         </div>
 
+        <div class="mb-4">
+            <label class="block">Harga</label>
+            <input type="number" name="harga" step="0.01" class="w-full border p-2" required>
+        </div>
+
         <input id="file" type="file" name="foto" accept="image/*" hidden onchange="previewImage(event)">
         <img id="preview" class="img-preview">
 
@@ -165,6 +170,9 @@
             <button type="button" class="btn-cancel" onclick="history.back()">Cancel</button>
             <button type="submit" class="btn-save">Simpan</button>
         </div>
+
+       
+
 
     </form>
 </div>

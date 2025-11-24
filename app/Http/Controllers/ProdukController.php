@@ -62,6 +62,7 @@ class ProdukController extends Controller
         $validated = $request->validate([
             'nama_produk' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategoris,id',
+            'harga' => 'required|numeric',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -71,8 +72,9 @@ class ProdukController extends Controller
 
         Produk::create($validated);
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('admin.index')->with('success', 'Produk berhasil ditambahkan!');
     }
+
 
 
     // ===============================

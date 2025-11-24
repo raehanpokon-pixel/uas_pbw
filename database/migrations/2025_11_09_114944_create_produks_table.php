@@ -13,10 +13,14 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id'); // relasi ke tabel kategoris
             $table->string('nama_produk');
             $table->string('foto')->nullable(); // untuk menyimpan path foto
+            $table->decimal('harga', 12, 2)->nullable(); // kolom harga (contoh: 2500000.00)
             $table->timestamps();
 
             // relasi ke tabel kategoris
-            $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
+            $table->foreign('kategori_id')
+                  ->references('id')
+                  ->on('kategoris')
+                  ->onDelete('cascade');
         });
     }
 

@@ -5,16 +5,39 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+
+
 
 // Redirect awal ke home
 Route::get('/', function () {
     return redirect()->route('home');
 })->name('root');
 
-// LOGIN - LOGOUT
+
+
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Tujuan redirect
+Route::get('/admin/produk', function () {
+    return "HALAMAN ADMIN - PRODUK";
+});
+
+Route::get('/produk', function () {
+    return "HALAMAN USER - PRODUK";
+});
+Route::get('/logout', function () {
+    // Hapus semua session login
+    session()->flush();
+
+    // Kembali ke halaman login
+    return redirect('/login');
+})->name('logout');
+
+
+
 
 // HOME
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -18,6 +18,25 @@
             width: 90%;
             max-width: 1300px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        /* === BUTTON LOGOUT === */
+        .btn-logout {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .btn-logout:hover {
+            background: #c0392b;
         }
 
         h1 {
@@ -112,7 +131,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        /* Tombol Edit & Hapus */
         .btn-edit {
             background: #3498db;
             color: white;
@@ -146,6 +164,9 @@
 
     <div class="container">
 
+        <!-- 🔥 Tambahan baru: Tombol Logout -->
+        <a href="<?php echo e(route('logout')); ?>" class="btn-logout">Logout</a>
+
         <h1>Daftar Produk (Admin)</h1>
 
         <a href="<?php echo e(route('produk.create')); ?>" class="btn-add">
@@ -159,8 +180,6 @@
                     <th>Nama Produk</th>
                     <th>Gender</th>
                     <th class="col-harga">Harga</th>
-
-                    <!-- Tambahkan kolom baru -->
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -178,7 +197,6 @@
 
                     <td class="col-harga">Rp <?php echo e(number_format($p->harga)); ?></td>
 
-                    <!-- Kolom Aksi -->
                     <td>
                         <a href="<?php echo e(route('admin.edit', $p->id)); ?>" class="btn-edit">Edit</a>
 
@@ -195,6 +213,8 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
+
+    </div>
 
 </body>
 </html>

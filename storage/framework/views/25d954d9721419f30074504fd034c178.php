@@ -117,7 +117,7 @@
 </head>
 
 <body>
-    @include('layouts.navbar')
+    <?php echo $__env->make('layouts.navbar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
     <div class="overlay">
         <div class="content-container">
@@ -139,4 +139,4 @@
         </div>
     </div>
 </body>
-</html>
+</html><?php /**PATH E:\uas_pbw\resources\views/about.blade.php ENDPATH**/ ?>

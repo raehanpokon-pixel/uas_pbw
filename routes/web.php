@@ -55,6 +55,12 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+// CONTACT
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+
 // REGISTER
 Route::get('/register', function () {
     return 'Halaman register belum dibuat';

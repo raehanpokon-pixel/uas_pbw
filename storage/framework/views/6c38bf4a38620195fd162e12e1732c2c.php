@@ -9,9 +9,9 @@
         <span class="dot">•</span>
         <a href="#">Collections</a>
         <span class="dot">•</span>
-        <a href="<?php echo e(route('home')); ?>">home</a>    
+        <a href="<?php echo e(route('home')); ?>">Home</a>    
         <span class="dot">•</span>
-        <a href="#">Contact</a>
+        <a href="<?php echo e(route('contact')); ?>">Contact</a>
     </nav>
 
    <div class="icons">

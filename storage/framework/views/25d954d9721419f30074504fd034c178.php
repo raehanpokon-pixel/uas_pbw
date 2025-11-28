@@ -139,4 +139,4 @@
         </div>
     </div>
 </body>
-</html><?php /**PATH D:\uaspbw\resources\views/about.blade.php ENDPATH**/ ?>
+</html><?php /**PATH E:\uas_pbw\resources\views/about.blade.php ENDPATH**/ ?>

@@ -26,8 +26,8 @@
 
         <label>Gender:</label><br>
         <select name="gender" required>
-            <option value="Pria">Pria</option>
-            <option value="Wanita">Wanita</option>
+            <option value="men">Pria</option>
+            <option value="women">Wanita</option>
         </select>
         <br><br>
 

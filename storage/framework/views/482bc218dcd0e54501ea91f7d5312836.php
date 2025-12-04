@@ -1,121 +1,98 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sign In — Modern</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-  <style>
-    :root{
-      --bg:#7b7b7b;
-      --card:#efefef;
-      --accent:#5a221f;
-      --muted:#9b9b9b;
-      --input-bg:#fff;
-      --radius:14px;
-      --shadow: 0 8px 30px rgba(0,0,0,0.25);
-      font-family: "Poppins", sans-serif;
-    }
+    
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    body{
-      margin:0;
-      height:100vh;
-      background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url("/mnt/data/3d076c03-96e7-4e72-b424-e5597ef82d42.png");
-      background-size:cover;
-      background-position:center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-    }
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
 
-    .card {
-      width:100%;
-      max-width:480px;
-      background: var(--card);
-      border-radius:16px;
-      box-shadow:var(--shadow);
-      padding:40px;
-      box-sizing:border-box;
-      border:6px solid rgba(255,255,255,0.6);
-    }
+    <style>
+        /* Background langsung base64 (tidak perlu upload file) */
+        .bg-image {
+            background-image: url("<?php echo e(asset('gambar-home/baground.png')); ?>");/* BASE64 FULL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-    h1{
-      text-align:center;
-      margin:0;
-      margin-bottom:6px;
-      font-size:32px;
-      font-weight:700;
-      color:var(--accent);
-    }
-
-    .subtitle{
-      text-align:center;
-      color:#444;
-      margin-bottom:22px;
-    }
-
-    input{
-      width:100%;
-      padding:14px;
-      border-radius:10px;
-      border:1px solid #ccc;
-      font-size:15px;
-      margin-bottom:14px;
-      box-sizing:border-box;
-    }
-
-    .btn{
-      width:100%;
-      padding:14px;
-      border:none;
-      border-radius:10px;
-      background:var(--accent);
-      color:white;
-      font-size:16px;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    /* Tambahan CREATE ACCOUNT */
-    .create {
-      margin-top:16px;
-      text-align:center;
-    }
-    .create a{
-      display:inline-block;
-      padding:10px 18px;
-      border-radius:10px;
-      border:1px solid var(--accent);
-      color:var(--accent);
-      text-decoration:none;
-      font-weight:600;
-    }
-  </style>
+        /* Warna sesuai desain */
+        .maroon { color: #6F2626; }
+        .bg-maroon { background-color: #6F2626; }
+        .input-cream { background-color: #F1E8E2; }
+    </style>
 </head>
 
-<body>
+<body class="bg-image min-h-screen flex flex-col">
 
-  <div class="card">
-    <h1>Sign In</h1>
-    <div class="subtitle">Welcome back! Please login to your account.</div>
+    
+    <nav class="w-full bg-maroon text-white py-4 px-10 flex justify-between items-center">
+        <div class="font-bold text-xl tracking-wide">SHOESTORE</div>
 
-    <form action="/login" method="POST">
-      <?php echo csrf_field(); ?>
+        <ul class="flex gap-8 uppercase text-sm">
+            <li><a href="#" class="hover:opacity-70">About</a></li>
+            <li><a href="#" class="hover:opacity-70">Collections</a></li>
+            <li><a href="#" class="hover:opacity-70">Shop</a></li>
+            <li><a href="#" class="hover:opacity-70">Contact</a></li>
+        </ul>
 
-      <input type="email" name="email" placeholder="Email" required>
+        <div class="flex gap-6 text-xl">
+            <i class="ri-search-line"></i>
+            <i class="ri-heart-line"></i>
+            <i class="ri-user-line"></i>
+        </div>
+    </nav>
 
-      <input type="password" name="password" placeholder="Password" required>
+    
+    <div class="flex flex-col items-center justify-center flex-grow text-center pt-12">
 
-      <button class="btn" type="submit">Login</button>
+        <h1 class="text-4xl font-bold maroon mb-1">Sign Up</h1>
 
-      <!-- BAGIAN CREATE ACCOUNT (DITAMBAHKAN) -->
-      <div class="create">
-        <a href="/register">Create Account</a>
-      </div>
+        <p class="maroon italic mb-8">
+            Welcome back! Please login to your account.
+        </p>
 
-    </form>
-  </div>
+        
+        <form method="POST" action="<?php echo e(route('login')); ?>" class="w-full max-w-md">
+            <?php echo csrf_field(); ?>
+
+            
+            <div class="relative mb-5">
+                <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 maroon text-lg"></i>
+
+                <input type="email" name="email"
+                    class="w-full input-cream text-maroon pl-12 pr-4 py-3 rounded-xl focus:ring-2 focus:ring-[#6F2626]"
+                    placeholder="Email" required>
+            </div>
+
+            
+            <div class="relative mb-6">
+                <i class="ri-lock-line absolute left-4 top-1/2 -translate-y-1/2 maroon text-lg"></i>
+                <i class="ri-eye-line absolute right-4 top-1/2 -translate-y-1/2 maroon text-lg cursor-pointer"></i>
+
+                <input type="password" name="password"
+                    class="w-full input-cream text-maroon pl-12 pr-10 py-3 rounded-xl focus:ring-2 focus:ring-[#6F2626]"
+                    placeholder="Password" required>
+            </div>
+
+            
+            <button type="submit"
+                class="w-full bg-maroon text-white py-3 rounded-2xl text-lg font-semibold hover:opacity-90">
+                Login
+            </button>
+        </form>
+
+        
+        <a href="<?php echo e(route('register')); ?>"
+            class="mt-5 inline-block bg-maroon text-white py-2 px-8 rounded-full text-sm hover:opacity-90">
+            Create Account
+        </a>
+
+    </div>
 
 </body>
 </html>

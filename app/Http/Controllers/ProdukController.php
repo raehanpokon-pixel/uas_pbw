@@ -129,4 +129,19 @@ class ProdukController extends Controller
 
         return view('produk.index', compact('produks', 'kategoris', 'gender'));
     }
+
+    public function show($id)
+    {
+        $produk = Produk::findOrFail($id);
+        return view('transaksi', compact('produk'));
+    }
+
+    public function checkout($id)
+    {
+        $produk = Produk::findOrFail($id);
+
+        return view('transaksi', compact('produk'));
+    }
+
+
 }

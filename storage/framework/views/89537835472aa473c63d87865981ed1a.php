@@ -6,11 +6,149 @@
     <title>ShoeStore</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+.best-seller {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.best-seller-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-name {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.product-price {
+    font-size: 15px;
+    margin-top: 4px;
+    font-weight: 700;
+    color: #5c2222;
+}
+
+.rating .star {
+    color: #ccc;
+    font-size: 18px;
+}
+
+.rating .star.active {
+    color: gold;
+}
+
+/* =======================
+   BEST SELLER SECTION (BESAR)
+======================= */
+.best-seller {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* SCROLL CONTAINER */
+.best-seller-scroll {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+}
+
+/* scrollbar */
+.best-seller-scroll::-webkit-scrollbar {
+    height: 10px;
+}
+.best-seller-scroll::-webkit-scrollbar-thumb {
+    background: #c4a484;
+    border-radius: 10px;
+}
+
+/* CARD LEBIH BESAR */
+.product-card {
+    min-width: 300px;            /* sebelumnya 240px */
+    background: #fff;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 5px 14px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    transition: 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+}
+
+/* GAMBAR LEBIH BESAR */
+.product-image {
+    width: 100%;
+    height: 260px;               /* sebelumnya 220px */
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+/* NAMA PRODUK LEBIH BESAR */
+.product-name {
+    margin-top: 16px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* HARGA LEBIH BESAR */
+.product-price {
+    font-size: 19px;
+    margin-top: 6px;
+    font-weight: 700;
+    color: #5c2222;
+}
+
+/* RATING */
+.rating .star {
+    color: #ccc;
+    font-size: 22px;
+}
+
+.rating .star.active {
+    color: gold;
+}
+
+</style>
+
 </head>
 
-
 <body class="bg-white">
-        <?php echo $__env->make('layouts.navbar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php echo $__env->make('layouts.navbar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
     <!-- =========================
         1. HERO SECTION
     ========================== -->
@@ -24,11 +162,13 @@
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 text-center text-white">
             <h2 class="text-2xl md:text-4xl font-light"><?php echo e($hero['title'] ?? 'New Brown Collection'); ?></h2>
             <h1 class="text-5xl md:text-7xl font-bold my-2"><?php echo e($hero['discount'] ?? '30% OFF'); ?></h1>
-            <a href="<?php echo e(route('produk.index')); ?>"
-   class="inline-block bg-white text-black font-semibold px-8 py-2 rounded-lg mt-4 text-lg hover:bg-gray-200 transition">
-    Get Now
-</a>
 
+            <!-- ============ PERBAIKAN ADA DI SINI ============ -->
+            <a href="<?php echo e(route('login')); ?>"
+               class="inline-block bg-white text-black font-semibold px-8 py-2 rounded-lg mt-4 text-lg hover:bg-gray-200 transition">
+                Get Now
+            </a>
+            <!-- ================================================= -->
         </div>
     </header>
 
@@ -103,53 +243,50 @@
             </div>
         </section>
 
-        <!-- =========================
-            4. BEST SELLERS
-        ========================== -->
-        <section class="mt-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Best Seller</h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <?php $__empty_1 = true; $__currentLoopData = $bestSellers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <div class="border border-gray-200 rounded-lg shadow-md overflow-hidden bg-gray-50">
-                        <div class="bg-gray-200 h-64">
-                            <img src="<?php echo e($product->image_url); ?>"
-                                 alt="<?php echo e($product->name); ?>"
-                                 class="w-full h-full object-cover">
-                        </div>
+    <!-- BEST SELLER SECTION -->
+    <section class="best-seller mt-12">
+        <h2 class="section-title">Best Sellers</h2>
 
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-gray-800"><?php echo e($product->name); ?></h3>
+        <div class="best-seller-scroll">
+            <?php $__currentLoopData = $bestSellers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <div class="product-card">
 
-                            <div class="flex items-center my-2">
-                                <?php for($i = 1; $i <= 5; $i++): ?>
-                                    <svg class="w-5 h-5 <?php echo e($i <= $product->rating ? 'text-yellow-400' : 'text-gray-300'); ?>"
-                                         fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.446a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.446a1 1 0 00-1.176 0l-3.368 2.446c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.06 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z"></path>
-                                    </svg>
-                                <?php endfor; ?>
+                <!-- GAMBAR PRODUK -->
+                <img src="<?php echo e($item->image_url); ?>" 
+                    alt="<?php echo e($item->nama_produk); ?>" 
+                    class="product-image">
 
-                                <span class="ml-2 text-gray-500 text-sm">(<?php echo e($product->rating); ?>)</span>
-                            </div>
+                <!-- NAMA PRODUK -->
+                <h3 class="product-name">
+                    <?php echo e($item->nama_produk); ?>
 
-                            <p class="text-xl font-bold text-gray-900 mb-4">
-                                Rp <?php echo e(number_format($product->price, 0, ',', '.')); ?>
+                </h3>
 
-                            </p>
+                <!-- ⭐ RATING (pindah ke atas harga) -->
+                <div class="rating mt-2">
+                    <?php for($i = 1; $i <= 5; $i++): ?>
+                        <span class="star <?php echo e($i <= ($item->rating ?? 0) ? 'active' : ''); ?>">★</span>
+                    <?php endfor; ?>
+                </div>
 
-                            <a href="#"
-                               class="w-full text-center block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
-                                Buy
-                            </a>
-                        </div>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <p class="col-span-3 text-center text-gray-500">
-                        Produk best seller belum tersedia.
-                    </p>
-                <?php endif; ?>
+                <!-- 💰 HARGA (dipindah ke bawah rating) -->
+                <p class="product-price mt-3">
+                    Rp <?php echo e(number_format($item->harga, 0, ',', '.')); ?>
+
+                </p>
+
+                <!-- 🛒 TOMBOL BUY -->
+                <a href="#"
+                class="mt-4 block text-center bg-black text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition">
+                Buy
+                </a>
+
             </div>
-        </section>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+    </section>
+
 
     </main>
 
@@ -161,7 +298,7 @@
             <div>
                 <h3 class="text-2xl font-bold text-white mb-4">SHOESTORE</h3>
                 <p>JALAN RUKOH, KEC. SYIAH KUALA,</p>
-                <p>KOTA BANDA ACEH, ACEH</p>
+                <p>Kota Banda Aceh, Aceh</p>
             </div>
 
             <div>
@@ -175,7 +312,7 @@
             <div>
                 <h4 class="text-lg font-semibold text-white mb-4">Layanan Pelanggan</h4>
                 <ul>
-                    <li class="mb-2"><a href="#" class="hover:text-white">Pengiriman & Kelacakan</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Pengiriman & Pelacakan</a></li>
                     <li class="mb-2"><a href="#" class="hover:text-white">Pengembalian & Penukaran</a></li>
                     <li class="mb-2"><a href="#" class="hover:text-white">Panduan Ukuran</a></li>
                 </ul>
